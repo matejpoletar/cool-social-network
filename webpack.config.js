@@ -1,5 +1,7 @@
 const path = require("path");
 
+const postCSSPlugins = [require("postcss-import"), require("postcss-simple-vars"), require("postcss-nested"), require("autoprefixer")];
+
 module.exports = {
   entry: "./src/main.js",
   output: {
@@ -29,6 +31,10 @@ module.exports = {
             presets: ["@babel/preset-react", ["@babel/preset-env", { targets: { node: "12" } }]],
           },
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader", { loader: "postcss-loader", options: { postcssOptions: { plugins: postCSSPlugins } } }],
       },
     ],
   },
