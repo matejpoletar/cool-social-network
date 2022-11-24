@@ -1,5 +1,23 @@
 @import "normalize.css";
 
-body {
-  background-color: rgb(137, 231, 200);
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:100,300,400");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat";
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 300px auto;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
 }

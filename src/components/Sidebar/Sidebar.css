@@ -1,0 +1,38 @@
+.sidebar {
+  position: sticky;
+  height: 100vh;
+  width: 280px;
+  background-color: #ffe5b6;
+  padding: 0 1rem;
+  padding-top: 30px;
+  grid-area: sidebar;
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    &__item {
+      display: flex;
+      width: 90%;
+      padding: 1rem 1.5rem 0.5rem 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #555555;
+      transition: color 0.2s ease-out, background-color 0.3s ease-out;
+      border-radius: 5px;
+
+      &--active {
+        background-color: #d37a46;
+        color: #fff;
+      }
+
+      &:not(&--active):hover {
+        color: #d37a46;
+      }
+
+      &__icon {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
