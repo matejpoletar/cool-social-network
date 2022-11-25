@@ -3,7 +3,11 @@ import "./Header.css";
 import { Avatar, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function Header() {
+export default function Header(props) {
+  const handleLogout = () => {
+    props.setIsLoggedIn(false);
+  };
+
   return (
     <header className="header">
       <h2 className="header__title">Cool Social Network</h2>
@@ -27,7 +31,7 @@ export default function Header() {
       <div className="header__user-area">
         <span>Welcome user!</span>
         <Avatar />
-        <Button variant="contained" color="error">
+        <Button onClick={handleLogout} variant="contained" color="error">
           Logout
         </Button>
       </div>
