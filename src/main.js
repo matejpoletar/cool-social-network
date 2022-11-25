@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./main.css";
+import Axios from "axios";
+
+Axios.defaults.baseURL = "http://localhost:8080";
 
 const root = ReactDOM.createRoot(document.querySelector("#app"));
 root.render(<App />);

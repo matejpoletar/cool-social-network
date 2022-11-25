@@ -29,7 +29,7 @@ export default function Header(props) {
         />
       </div>
       <div className="header__user-area">
-        <span>Welcome user!</span>
+        <span>Welcome {props.username}!</span>
         <Avatar />
         <Button onClick={handleLogout} variant="contained" color="error">
           Logout
