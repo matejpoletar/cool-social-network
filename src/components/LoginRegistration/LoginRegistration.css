@@ -1,9 +1,16 @@
+@import "../../assets/css/mixins.css";
+
 .page {
   width: 100vw;
   height: 100vh;
   background-image: url("../../assets/images/background-main.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  padding-top: 2rem;
+
+  @mixin atMedium {
+    padding-top: 5rem;
+  }
 
   &__title,
   &__subtitle {
@@ -12,45 +19,127 @@
   }
 
   &__title {
-    margin-top: 2rem;
+    margin: 0;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+
+    @mixin atMedium {
+      font-size: 3rem;
+      margin-top: 0;
+    }
+
+    @mixin atLarge {
+      font-size: 4rem;
+    }
+  }
+
+  &__subtitle {
+    margin: 0 1rem;
+    @mixin atMedium {
+      margin: 0;
+      font-size: 1.75rem;
+    }
+  }
+
+  &__registration-link {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: rgb(2 79 145);
+    margin-top: 0.5rem;
+
+    & > button {
+      color: rgb(2 79 145);
+
+      border: none;
+      background: none;
+      font-weight: 600;
+    }
+
+    @mixin atMedium {
+      display: none;
+      z-index: -10;
+    }
+  }
+
+  &__registration-link--hidden {
+    display: none;
   }
 }
 
 .wrapper {
-  width: 60%;
+  max-width: 300px;
+  width: 70%;
+  top: 10%;
   margin-left: auto;
   margin-right: auto;
-
   position: relative;
-  top: 10%;
-  background-color: #ffffffaa;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  justify-content: space-around;
 
-  padding-bottom: 5rem;
+  @mixin atMedium {
+    width: 800px;
+    max-width: 1000px;
+    background-color: #ffffffaa;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    padding-bottom: 5rem;
 
-  &::after {
-    content: "";
-    outline: 1px black solid;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    height: 100%;
+    &::after {
+      content: "";
+      outline: 1px black solid;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      height: 100%;
+    }
+  }
+
+  @mixin atLarge {
+    width: 1000px;
   }
 }
 
 .form-container {
-  min-width: 300px;
+  background-color: #ffffffaa;
+  padding: 1.5rem;
+  border-radius: 10px;
+
+  @mixin atMedium {
+    padding: 0;
+    border-radius: 0;
+    min-width: 300px;
+    background-color: #ffffff00;
+  }
 
   &__label {
-    margin: 2rem 0;
+    display: none;
+    @mixin atMedium {
+      display: block;
+      margin: 2rem 0;
+    }
   }
 
   &__form {
     display: flex;
     gap: 2rem;
     flex-direction: column;
+  }
+
+  &--register {
+    display: block;
+  }
+
+  &--login {
+    display: block;
+  }
+
+  &--hidden-mobile {
+    display: none;
+    @mixin atMedium {
+      display: block;
+    }
   }
 }

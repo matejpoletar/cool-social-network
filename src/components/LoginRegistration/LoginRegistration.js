@@ -2,7 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import Axios from "axios";
 import "./LoginRegistration.css";
 import { TextField, Button } from "@mui/material";
-import { appContext, appContextDispatch } from "../../AppContext";
+import SouthEastIcon from "@mui/icons-material/SouthEast";
+import { appContextDispatch } from "../../AppContext";
 import { useImmerReducer } from "use-immer";
 
 export default function LoginRegistration(props) {
@@ -239,12 +240,19 @@ export default function LoginRegistration(props) {
     }
   }, [stateRegister.password.value]);
 
+  const [isRegistrationActive, setIsRegistrationActive] = useState(false);
+
   return (
     <div className="page">
       <h1 className="page__title">Cool Social Network</h1>
-      <h3 className="page__subtitle">Sign up for Cool Social Network today.</h3>
+      <p className="page__subtitle">Not yet registered? Sign up for Cool Social Network today.</p>
+      <div className="page__registration-link">
+        <SouthEastIcon />
+        <button onClick={() => setIsRegistrationActive(!isRegistrationActive)}>{isRegistrationActive ? "Back to Login" : "Register here"}</button>
+      </div>
+
       <div className="wrapper">
-        <div className="form-container">
+        <div className={`form-container form-container--login ${isRegistrationActive ? "form-container--hidden-mobile" : ""}`}>
           <h2 className="form-container__label">Login</h2>
           <form onSubmit={handleLogin} className="form-container__form">
             <TextField onChange={(e) => dispatchLogin({ type: "usernameImmediateChange", value: e.target.value })} label="Username" variant="filled" error={stateLogin.username.hasError} helperText={stateLogin.username.message} />
@@ -254,7 +262,7 @@ export default function LoginRegistration(props) {
             </Button>
           </form>
         </div>
-        <div className="form-container">
+        <div className={`form-container form-container--register ${!isRegistrationActive ? "form-container--hidden-mobile" : ""}`}>
           <h2 className="form-container__label">Register</h2>
           <form onSubmit={handleRegister} className="form-container__form">
             <TextField onChange={(e) => dispatchRegister({ type: "usernameImmediateChange", value: e.target.value })} label="Username" variant="filled" error={stateRegister.username.hasError} helperText={stateRegister.username.message} />

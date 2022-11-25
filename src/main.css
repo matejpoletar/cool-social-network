@@ -1,4 +1,5 @@
 @import "normalize.css";
+@import "./assets/css/mixins.css";
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:100,300,400");
 
@@ -15,9 +16,11 @@ a {
 }
 
 #app {
-  display: grid;
-  grid-template-columns: 300px auto;
-  grid-template-areas:
-    "header header"
-    "sidebar main";
+  @mixin atMedium {
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-areas:
+      "header header"
+      "sidebar main";
+  }
 }
