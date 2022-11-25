@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
@@ -9,10 +9,10 @@ import { appContext, appContextDispatch } from "./AppContext";
 
 export default function App() {
   const initialState = {
-    isLoggedIn: false,
+    isLoggedIn: Boolean(localStorage.getItem("coolSocialNetworkUsername")),
     user: {
-      username: "",
-      token: "",
+      username: localStorage.getItem("coolSocialNetworkUsername"),
+      token: localStorage.getItem("coolSocialNetworkToken"),
     },
   };
 
@@ -26,6 +26,16 @@ export default function App() {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (state.isLoggedIn) {
+      localStorage.setItem("coolSocialNetworkUsername", state.user.username);
+      localStorage.setItem("coolSocialNetworkToken", state.user.token);
+    } else {
+      localStorage.removeItem("coolSocialNetworkUsername");
+      localStorage.removeItem("coolSocialNetworkToken");
+    }
+  }, [state.isLoggedIn]);
 
   return (
     <appContext.Provider value={state}>
