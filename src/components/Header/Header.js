@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Header.css";
 import { Avatar, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { appContext, appContextDispatch } from "../../AppContext";
 
 export default function Header(props) {
+  const context = useContext(appContext);
+  const dispatch = useContext(appContextDispatch);
+
   const handleLogout = () => {
-    props.setIsLoggedIn(false);
+    dispatch({ type: "logout" });
   };
 
   return (
@@ -29,7 +33,7 @@ export default function Header(props) {
         />
       </div>
       <div className="header__user-area">
-        <span>Welcome {props.username}!</span>
+        <span>Welcome {context.user.username}!</span>
         <Avatar />
         <Button onClick={handleLogout} variant="contained" color="error">
           Logout

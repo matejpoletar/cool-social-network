@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Axios from "axios";
 import "./LoginRegistration.css";
 import { TextField, Button } from "@mui/material";
+import { appContext, appContextDispatch } from "../../AppContext";
 
 export default function LoginRegistration(props) {
+  const dispatch = useContext(appContextDispatch);
+
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
@@ -12,9 +15,7 @@ export default function LoginRegistration(props) {
     e.preventDefault();
     try {
       const response = await Axios.post("/login", { username, password });
-      console.log(response);
-      props.setIsLoggedIn(true);
-      props.setUsername(username);
+      dispatch({ type: "login", data: { username: response.data.data.username, token: response.data.token } });
     } catch (err) {
       console.log(err);
     }
@@ -24,9 +25,7 @@ export default function LoginRegistration(props) {
     e.preventDefault();
     try {
       const response = await Axios.post("/register", { username, password, email });
-      console.log(response);
-      props.setIsLoggedIn(true);
-      props.setUsername(username);
+      dispatch({ type: "login", data: { username: response.data.data.username, token: response.data.token } });
     } catch (err) {
       console.log(err);
     }
