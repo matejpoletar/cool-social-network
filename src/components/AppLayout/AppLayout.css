@@ -1,0 +1,11 @@
+@import "../../assets/css/mixins.css";
+
+.app-layout {
+  @mixin atMedium {
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-areas:
+      "header header"
+      "sidebar main";
+  }
+}

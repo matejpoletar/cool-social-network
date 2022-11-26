@@ -243,10 +243,10 @@ export default function LoginRegistration(props) {
   const [isRegistrationActive, setIsRegistrationActive] = useState(false);
 
   return (
-    <div className="page">
-      <h1 className="page__title">Cool Social Network</h1>
-      <p className="page__subtitle">Not yet registered? Sign up for Cool Social Network today.</p>
-      <div className="page__registration-link">
+    <div className="login-page">
+      <h1 className="login-page__title">Cool Social Network</h1>
+      <p className="login-page__subtitle">Not yet registered? Sign up for Cool Social Network today.</p>
+      <div className="login-page__registration-link">
         <SouthEastIcon />
         <button onClick={() => setIsRegistrationActive(!isRegistrationActive)}>{isRegistrationActive ? "Back to Login" : "Register here"}</button>
       </div>

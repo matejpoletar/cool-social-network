@@ -1,6 +1,6 @@
 @import "../../assets/css/mixins.css";
 
-.page {
+.login-page {
   width: 100vw;
   height: 100vh;
   background-image: url("../../assets/images/background-main.jpg");

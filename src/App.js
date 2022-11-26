@@ -1,12 +1,11 @@
 import React, { useReducer, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./components/Home/Home";
 import CreatePost from "./components/CreatePost/CreatePost";
 import LoginRegistration from "./components/LoginRegistration/LoginRegistration";
 import { appContext, appContextDispatch } from "./AppContext";
+import AppLayout from "./components/AppLayout/AppLayout";
 
 export default function App() {
   const initialState = {
@@ -43,16 +42,14 @@ export default function App() {
       <appContextDispatch.Provider value={dispatch}>
         <BrowserRouter>
           {state.isLoggedIn ? (
-            <>
-              <Header />
-              <Sidebar />
+            <AppLayout>
               <Routes>
                 <Route path="/dashboard" element={<></>} />
                 <Route path="/create-post" element={<CreatePost />} />
                 <Route path="/settings" element={<></>} />
                 <Route path="/" element={<Home />} />
               </Routes>
-            </>
+            </AppLayout>
           ) : (
             <LoginRegistration />
           )}

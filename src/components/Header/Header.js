@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Header.css";
 import { Avatar, TextField, Button, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { deepOrange } from "@mui/material/colors";
 import { appContext, appContextDispatch } from "../../AppContext";
 
 export default function Header(props) {
@@ -34,7 +35,7 @@ export default function Header(props) {
       </div>
       <div className="header__user-area">
         <span>Welcome {context.user.username}!</span>
-        <Avatar />
+        <Avatar alt={context.user.username} src="/" sx={{ bgcolor: deepOrange[500] }} />
         <Button onClick={handleLogout} variant="contained" color="error">
           Logout
         </Button>

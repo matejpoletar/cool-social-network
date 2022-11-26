@@ -14,13 +14,3 @@ a {
   text-decoration: none;
   color: unset;
 }
-
-#app {
-  @mixin atMedium {
-    display: grid;
-    grid-template-columns: 300px auto;
-    grid-template-areas:
-      "header header"
-      "sidebar main";
-  }
-}
