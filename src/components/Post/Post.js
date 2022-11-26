@@ -15,7 +15,6 @@ export default function Post() {
   const context = useContext(appContext);
   const [postData, setPostData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -54,7 +53,7 @@ export default function Post() {
           <h2 className="post__title">{postData.title}</h2>
           {context.user.username === postData.author.username && (
             <div className="post__buttons">
-              <Button variant="outlined" startIcon={<EditIcon />}>
+              <Button onClick={() => navigate(`/post/${id}/edit`)} variant="outlined" startIcon={<EditIcon />}>
                 Edit
               </Button>
               <Button onClick={deleteHandler} variant="contained" color="error" startIcon={<DeleteIcon />}>

@@ -48,6 +48,7 @@ export default function App() {
                 <Route path="/dashboard" element={<></>} />
                 <Route path="/create-post" element={<CreatePost />} />
                 <Route path="/post/:id" element={<Post />} />
+                <Route path="/post/:id/edit" element={<CreatePost editing />} />
                 <Route path="/settings" element={<></>} />
                 <Route path="/" element={<Home />} />
               </Routes>
