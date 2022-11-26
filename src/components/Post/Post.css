@@ -1,0 +1,33 @@
+.post {
+  display: flex;
+  justify-content: space-between;
+  max-width: 700px;
+  margin-bottom: 0.5rem;
+
+  &__title {
+    font-size: 2rem;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__content {
+    outline: 1px solid lightgrey;
+    padding: 2rem 3.5rem;
+    max-width: 700px;
+    border-radius: 10px;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+
+    &__text {
+      font-style: italic;
+    }
+  }
+}

@@ -28,6 +28,7 @@
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.3",
     "react-router-dom": "^6.4.3",
     "use-immer": "^0.8.1"
   },

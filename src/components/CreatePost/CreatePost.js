@@ -3,16 +3,19 @@ import Axios from "axios";
 import { TextField, Button } from "@mui/material";
 import "./CreatePost.css";
 import { appContext } from "../../AppContext";
+import { useNavigate } from "react-router-dom";
 
 export default function createPost() {
   const [postTitle, setPostTitle] = useState();
   const [postContent, setPostContent] = useState();
   const appState = useContext(appContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await Axios.post("/post", { title: postTitle, body: postContent, token: appState.user.token });
+      const res = await Axios.post("/post", { title: postTitle, content: postContent, token: appState.user.token });
+      navigate(`/post/${res.data._id}`);
       console.log("New post was created.");
     } catch (e) {
       console.log("Error creating post.");
