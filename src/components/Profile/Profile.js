@@ -7,6 +7,7 @@ import Loading from "../Loading/Loading";
 import PostsList from "../PostsList/PostsList";
 import "./Profile.css";
 import { useImmer } from "use-immer";
+import arrayBufferToBase64 from "../../assets/scripts/formatImage";
 
 export default function Profile() {
   const context = useContext(appContext);
@@ -60,7 +61,7 @@ export default function Profile() {
     return (
       <div className="profile">
         <div className="profile__info">
-          <Avatar alt={userData.username} src="/" sx={{ height: 200, width: 200, bgcolor: "orange" }} />
+          <Avatar alt={userData.username} src={userData.avatar ? arrayBufferToBase64(userData.avatar.data) : "/"} sx={{ height: 200, width: 200, bgcolor: "orange" }} />
           <div>
             <h2 className="profile__username">{userData.username}</h2>
             <div className="profile__counts">

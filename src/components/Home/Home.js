@@ -3,10 +3,11 @@ import { appContext } from "../../AppContext";
 import Axios from "axios";
 import Loading from "../Loading/Loading";
 import { Link, useParams } from "react-router-dom";
-import formatDate from "../../assets/scripts/commonFunctions";
+import formatDate from "../../assets/scripts/formatDate";
 import ReactMarkdown from "react-markdown";
 import "./Home.css";
 import { Avatar } from "@mui/material";
+import arrayBufferToBase64 from "../../assets/scripts/formatImage";
 
 export default function Home() {
   const context = useContext(appContext);
@@ -47,7 +48,7 @@ export default function Home() {
               <div key={index} className="posts-list__item">
                 <div className="posts-list__item__title">
                   <Link to={`/profile/${post.author.username}`}>
-                    <Avatar alt={post.author.username} src="/" sx={{ bgcolor: "orange", width: 34, height: 34 }} />
+                    <Avatar alt={post.author.username} src={post.author.avatar ? arrayBufferToBase64(post.author.avatar.data) : "/"} sx={{ bgcolor: "orange", width: 34, height: 34 }} />
                   </Link>
                   <h2>{post.title}</h2>
                 </div>

@@ -3,7 +3,7 @@ import { appContext } from "../../AppContext";
 import Axios from "axios";
 import Loading from "../Loading/Loading";
 import { Link, useParams } from "react-router-dom";
-import formatDate from "../../assets/scripts/commonFunctions";
+import formatDate from "../../assets/scripts/formatDate";
 import ReactMarkdown from "react-markdown";
 import "./PostsList.css";
 

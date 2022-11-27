@@ -3,7 +3,7 @@ import "./Post.css";
 import ReactMarkdown from "react-markdown";
 import { appContext, appContextDispatch } from "../../AppContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import formatDate from "../../assets/scripts/commonFunctions";
+import formatDate from "../../assets/scripts/formatDate";
 import Axios from "axios";
 import { Avatar, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
