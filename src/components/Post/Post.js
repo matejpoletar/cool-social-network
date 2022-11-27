@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./Post.css";
 import ReactMarkdown from "react-markdown";
-import ReactTooltip from "react-tooltip";
-import { appContext } from "../../AppContext";
+import { appContext, appContextDispatch } from "../../AppContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import formatDate from "../../assets/scripts/commonFunctions";
 import Axios from "axios";
@@ -13,6 +12,7 @@ import Loading from "../Loading/Loading";
 
 export default function Post() {
   const context = useContext(appContext);
+  const dispatch = useContext(appContextDispatch);
   const [postData, setPostData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
@@ -37,10 +37,11 @@ export default function Post() {
       try {
         const res = await Axios.delete(`/post/${id}/delete`, { data: { token: context.user.token } });
         if (res.data == "Success") {
+          dispatch({ type: "flashMessage", data: { message: "Post has been deleted.", status: "info" } });
           navigate("/");
         }
       } catch {
-        console.log("Error in deleting post.");
+        dispatch({ type: "flashMessage", data: { message: "Post can't be deleted.", status: "error" } });
       }
     }
   }
@@ -48,9 +49,9 @@ export default function Post() {
     return <Loading />;
   } else {
     return (
-      <>
-        <div className="post">
-          <h2 className="post__title">{postData.title}</h2>
+      <div className="post">
+        <div className="post__title">
+          <h2 className="post__title__heading">{postData.title}</h2>
           {context.user.username === postData.author.username && (
             <div className="post__buttons">
               <Button onClick={() => navigate(`/post/${id}/edit`)} variant="outlined" startIcon={<EditIcon />}>
@@ -62,6 +63,7 @@ export default function Post() {
             </div>
           )}
         </div>
+
         <div className="post__info">
           <Link to={`/profile/${postData.author.username}`}>
             <Avatar alt={context.user.username} src="/" sx={{ bgcolor: "orange", width: 34, height: 34 }} />
@@ -73,7 +75,7 @@ export default function Post() {
         <div className="post__content">
           <ReactMarkdown children={postData.content} />
         </div>
-      </>
+      </div>
     );
   }
 }

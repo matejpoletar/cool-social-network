@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { appContext, appContextDispatch } from "./AppContext";
+import { useImmerReducer } from "use-immer";
 
 import Home from "./components/Home/Home";
 import CreatePost from "./components/CreatePost/CreatePost";
@@ -15,18 +16,27 @@ export default function App() {
       username: localStorage.getItem("coolSocialNetworkUsername"),
       token: localStorage.getItem("coolSocialNetworkToken"),
     },
+    flashMessages: [],
   };
 
-  const reducer = (prevState, action) => {
+  const reducer = (state, action) => {
     switch (action.type) {
       case "login":
-        return { ...prevState, isLoggedIn: true, user: { username: action.data.username, token: action.data.token } };
+        state.isLoggedIn = true;
+        state.user.username = action.data.username;
+        state.user.token = action.data.token;
+        break;
       case "logout":
-        return { ...prevState, isLoggedIn: false, user: {} };
+        state.isLoggedIn = false;
+        state.user = {};
+        break;
+      case "flashMessage":
+        state.flashMessages.push(action.data);
+        break;
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useImmerReducer(reducer, initialState);
 
   useEffect(() => {
     if (state.isLoggedIn) {
