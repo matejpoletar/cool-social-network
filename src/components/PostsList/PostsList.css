@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   padding-bottom: 5rem;
   width: 800px;
+  margin-top: 1rem;
 
   &__item {
     outline: 1px solid lightgrey;
@@ -16,6 +17,8 @@
 
     &__title {
       margin-bottom: 0.5rem;
+      display: flex;
+      gap: 1rem;
     }
 
     &__info {
