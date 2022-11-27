@@ -8,6 +8,7 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import LoginRegistration from "./components/LoginRegistration/LoginRegistration";
 import AppLayout from "./components/AppLayout/AppLayout";
 import Post from "./components/Post/Post";
+import Profile from "./components/Profile/Profile";
 
 export default function App() {
   const initialState = {
@@ -55,7 +56,7 @@ export default function App() {
           {state.isLoggedIn ? (
             <AppLayout>
               <Routes>
-                <Route path="/dashboard" element={<></>} />
+                <Route path="/profile/:username" element={<Profile />} />
                 <Route path="/create-post" element={<CreatePost />} />
                 <Route path="/post/:id" element={<Post />} />
                 <Route path="/post/:id/edit" element={<CreatePost editing />} />

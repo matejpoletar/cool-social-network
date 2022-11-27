@@ -1,41 +1,44 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 import HomeIcon from "@mui/icons-material/Home";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PersonIcon from "@mui/icons-material/Person";
 import PostAddIcon from "@mui/icons-material/PostAdd";
-
-const sidebarNavItems = [
-  {
-    display: "Home",
-    icon: <HomeIcon />,
-    to: "/",
-    section: "home",
-  },
-  {
-    display: "Dashboard",
-    icon: <PersonIcon />,
-    to: "/dashboard",
-    section: "dashboard",
-  },
-  {
-    display: "New Post",
-    icon: <PostAddIcon />,
-    to: "/create-post",
-    section: "create-post",
-  },
-  {
-    display: "Settings",
-    icon: <SettingsIcon />,
-    to: "/settings",
-    section: "settings",
-  },
-];
+import { appContext } from "../../AppContext";
 
 export default function Sidebar() {
+  const context = useContext(appContext);
+
   const [activeIndex, setActiveIndex] = useState(-1);
   const location = useLocation();
+
+  const sidebarNavItems = [
+    {
+      display: "Home",
+      icon: <HomeIcon />,
+      to: "/",
+      section: "home",
+    },
+    {
+      display: "Profile",
+      icon: <PersonIcon />,
+      to: `/profile/${context.user.username}`,
+      section: "profile",
+    },
+    {
+      display: "New Post",
+      icon: <PostAddIcon />,
+      to: "/create-post",
+      section: "create-post",
+    },
+    {
+      display: "Settings",
+      icon: <SettingsIcon />,
+      to: "/settings",
+      section: "settings",
+    },
+  ];
 
   useEffect(() => {
     const currentPath = location.pathname.split("/")[1];

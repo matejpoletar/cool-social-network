@@ -6,6 +6,9 @@
   align-items: center;
   grid-area: header;
   grid-column: span 2;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
   &__title {
     margin: 0;

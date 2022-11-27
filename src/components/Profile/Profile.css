@@ -1,0 +1,27 @@
+.profile {
+  &__info {
+    display: flex;
+    gap: 5rem;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+
+  &__username {
+    font-size: 3rem;
+  }
+
+  &__counts {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+  }
+
+  &__posts {
+    &__title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

@@ -66,7 +66,7 @@ export default function Post() {
 
         <div className="post__info">
           <Link to={`/profile/${postData.author.username}`}>
-            <Avatar alt={context.user.username} src="/" sx={{ bgcolor: "orange", width: 34, height: 34 }} />
+            <Avatar alt={postData.author.username} src="/" sx={{ bgcolor: "orange", width: 34, height: 34 }} />
           </Link>
           <span className="post__info__text">
             Posted by <Link to={`/profile/${postData.author.username}`}>{postData.author.username}</Link> on {formatDate(new Date(postData.createdAt))}

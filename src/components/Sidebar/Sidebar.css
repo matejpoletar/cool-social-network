@@ -6,6 +6,7 @@
   padding: 0 1rem;
   padding-top: 30px;
   grid-area: sidebar;
+  top: 112px;
 
   &__menu {
     display: flex;

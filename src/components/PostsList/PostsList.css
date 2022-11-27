@@ -1,0 +1,38 @@
+.posts-list {
+  gap: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 5rem;
+  width: 800px;
+
+  &__item {
+    outline: 1px solid lightgrey;
+    padding: 2rem 3.5rem 1rem 3.5rem;
+    border-radius: 10px;
+    width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+
+    &__title {
+      margin-bottom: 0.5rem;
+    }
+
+    &__info {
+      font-style: italic;
+      margin-left: 2rem;
+    }
+
+    &__read-more {
+      font-style: italic;
+      margin-left: 1.5rem;
+      text-align: end;
+      color: #d37a46;
+      font-size: 1.1rem;
+    }
+
+    &__content {
+      margin: 1.5rem 0 1rem 0.5rem;
+    }
+  }
+}
