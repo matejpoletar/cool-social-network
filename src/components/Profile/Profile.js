@@ -1,44 +1,58 @@
-import { Avatar } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Avatar, Button, Tooltip } from "@mui/material";
+import Axios from "axios";
 import { appContext } from "../../AppContext";
+import Loading from "../Loading/Loading";
 import PostsList from "../PostsList/PostsList";
 import "./Profile.css";
-import Axios from "axios";
-import Loading from "../Loading/Loading";
+import { useImmer } from "use-immer";
 
 export default function Profile() {
   const context = useContext(appContext);
 
   const { username } = useParams();
   const navigate = useNavigate();
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useImmer();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const res = await Axios.post("/check-username", { username: username });
-        if (res.data === false) {
+        const checkResponse = await Axios.post("/check-username", { username: username });
+        if (!checkResponse.data) {
           navigate("/");
           return;
         }
-      } catch {
-        console.log("Error in checking username.");
-      }
-
-      try {
         const res = await Axios.post(`/profile/${username}`, { token: context.user.token });
         setUserData(res.data);
         setIsLoading(false);
-        console.log(res.data);
       } catch {
         console.log("Error in fetching post data.");
       }
     }
-
     fetchUserData();
   }, [username]);
+
+  const onClickHandler = async () => {
+    try {
+      if (userData.isFollowing) {
+        await Axios.delete(`/profile/${username}/unfollow`, { data: { token: context.user.token } });
+        setUserData((state) => {
+          state.isFollowing = false;
+          state.counts.followersCount--;
+        });
+      } else {
+        await Axios.post(`/profile/${username}/follow`, { token: context.user.token });
+        setUserData((state) => {
+          state.isFollowing = true;
+          state.counts.followersCount++;
+        });
+      }
+    } catch {
+      console.log("Error in handle follow/unfollow.");
+    }
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -54,6 +68,16 @@ export default function Profile() {
               <span>Followers: {userData.counts.followersCount}</span>
               <span>Following: {userData.counts.followingCount}</span>
             </div>
+            {userData.username !== context.user.username && (
+              <div className="profile__follow">
+                <i>{userData.isFollowing ? "You are following this user" : ""}</i>
+                <Tooltip arrow title={userData.isFollowing ? "" : "Follow this user to see latest posts from this user in your Home page"}>
+                  <Button onClick={onClickHandler} variant="contained">
+                    {userData.isFollowing ? "Unfollow" : "Follow"}
+                  </Button>
+                </Tooltip>
+              </div>
+            )}
           </div>
         </div>
         <div className="profile__posts">
