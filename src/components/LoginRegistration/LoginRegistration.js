@@ -173,9 +173,17 @@ export default function LoginRegistration(props) {
     if (res.data) {
       try {
         const response = await Axios.post("/login", { username: stateLogin.username.value, password: stateLogin.password.value });
-        console.log(response);
         if (response.data.user) {
-          appDispatch({ type: "login", data: { username: response.data.user.username, token: response.data.token } });
+          appDispatch({
+            type: "login",
+            data: {
+              username: response.data.user.username,
+              email: response.data.user.email,
+              registeredAt: response.data.user.createdAt,
+              token: response.data.token,
+              avatar: response.data.user.profileImgUrl ? response.data.user.profileImgUrl : "",
+            },
+          });
         } else {
           dispatchLogin({ type: "passwordOnLogin", value: true });
         }
@@ -198,7 +206,17 @@ export default function LoginRegistration(props) {
     if (!stateRegister.username.hasError && !stateRegister.email.hasError && !stateRegister.password.hasError) {
       try {
         const response = await Axios.post("/register", { username: stateRegister.username.value, password: stateRegister.password.value, email: stateRegister.email.value });
-        appDispatch({ type: "login", data: { username: response.data.data.username, token: response.data.token } });
+        console.log(response);
+        appDispatch({
+          type: "login",
+          data: {
+            username: response.data.user.username,
+            email: response.data.user.email,
+            registeredAt: response.data.user.createdAt,
+            token: response.data.token,
+            avatar: "",
+          },
+        });
       } catch (err) {
         console.log(err);
       }
@@ -207,7 +225,7 @@ export default function LoginRegistration(props) {
 
   useEffect(() => {
     if (stateRegister.username.value.trim()) {
-      const delay = setTimeout(() => dispatch({ type: "usernameAfterDelay" }), 700);
+      const delay = setTimeout(() => dispatchRegister({ type: "usernameAfterDelay" }), 700);
       return () => clearTimeout(delay);
     }
   }, [stateRegister.username.value]);

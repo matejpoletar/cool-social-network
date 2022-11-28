@@ -1,0 +1,52 @@
+.settings {
+  &__title {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  &__image {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    & > img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    &__background {
+      opacity: 0.3;
+    }
+
+    &__front {
+      clip-path: circle(125px at center);
+    }
+  }
+
+  &__input {
+    & > input[type="file"] {
+      color: rgba(0, 0, 0, 0);
+      line-height: 1.5rem;
+    }
+    margin-top: 0.5rem;
+    position: relative;
+  }
+
+  &__input--cover {
+    width: 80vw;
+    height: 30px;
+    border: 1px solid black;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 108px;
+  }
+
+  &__submit {
+    padding: 5px 10px;
+    margin-top: 1rem;
+  }
+}
