@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Header.css";
-import { Avatar, TextField, Button, InputAdornment } from "@mui/material";
+import { Avatar, TextField, Button, InputAdornment, Menu, MenuItem } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { deepOrange } from "@mui/material/colors";
 import { appContext, appContextDispatch } from "../../AppContext";

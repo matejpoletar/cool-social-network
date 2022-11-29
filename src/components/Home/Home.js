@@ -42,6 +42,7 @@ export default function Home() {
       <>
         <h2 className="home__heading">See the latest posts of users you are following</h2>
         <div className="posts-list">
+          {posts.length === 0 && <p>You don't follow anyone yet. Follow other users to see their latest posts here.</p>}
           {posts.map((post, index) => {
             return (
               <div key={index} className="posts-list__item">
@@ -49,7 +50,7 @@ export default function Home() {
                   <Link to={`/profile/${post.author.username}`}>
                     <Avatar alt={post.author.username} src={post.author.avatar} sx={{ bgcolor: "orange", width: 34, height: 34 }} />
                   </Link>
-                  <h2>{post.title}</h2>
+                  <h3>{post.title}</h3>
                 </div>
                 <div className="posts-list__item__info">
                   <span>

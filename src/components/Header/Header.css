@@ -1,3 +1,5 @@
+@import "../../assets/css/mixins.css";
+
 .header {
   background: url(../../assets/images/background-header.jpg);
   padding: 1.2rem 3rem 1.2rem 2.2rem;
@@ -9,23 +11,33 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  flex-wrap: wrap;
+  gap: 2rem;
 
   &__title {
     margin: 0;
     color: #fff;
     font-size: 2rem;
     width: 220px;
+    font-weight: 600;
   }
 
   &__user-area {
-    font-size: 1.125rem;
-    display: flex;
-    gap: 1.2rem;
-    align-items: center;
-    min-width: fit-content;
+    display: none;
+    @mixin atSmall {
+      display: flex;
+      font-size: 1.125rem;
+      gap: 1.2rem;
+      align-items: center;
+      min-width: fit-content;
+    }
   }
 
   &__searchbar {
-    width: 550px;
+    display: none;
+    @mixin atSmall {
+      display: inline-block;
+      width: 550px;
+    }
   }
 }

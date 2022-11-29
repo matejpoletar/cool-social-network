@@ -44,6 +44,7 @@ export default function App() {
         break;
       case "setAvatar":
         state.user.avatar = action.data;
+        localStorage.removeItem("coolSocialNetworkAvatar");
         localStorage.setItem("coolSocialNetworkAvatar", action.data);
         break;
     }

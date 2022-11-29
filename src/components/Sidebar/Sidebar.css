@@ -1,4 +1,10 @@
+@import "../../assets/css/mixins.css";
+
 .sidebar {
+  display: none;
+  @mixin atSmall {
+    display: block;
+  }
   position: sticky;
   height: calc(100vh - 112px);
   width: 280px;
@@ -12,6 +18,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
+    & a {
+      text-decoration: none;
+    }
+
     &__item {
       display: flex;
       width: 90%;

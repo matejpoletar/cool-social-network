@@ -42,7 +42,7 @@ export default function PostsList() {
           return (
             <div key={index} className="posts-list__item">
               <div className="posts-list__item__title">
-                <h2>{post.title}</h2>
+                <h3>{post.title}</h3>
               </div>
               <div className="posts-list__item__info">
                 <span>Posted on {formatDate(new Date(post.createdAt))}</span>

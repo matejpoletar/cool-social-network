@@ -81,7 +81,7 @@ export default function Profile() {
           </div>
         </div>
         <div className="profile__posts">
-          <h2 className="profile__posts__title">{username}'s posts:</h2>
+          <h2 className="profile__posts__title">{userData.username === context.user.username ? "Your" : username + "'s"} posts:</h2>
           {userData.counts.postsCount === 0 && userData.username === context.user.username && <p>You don't have any posts yet. Create some new posts.</p>}
           {userData.counts.postsCount === 0 && userData.username !== context.user.username && <p>{userData.username} doesn't have any posts yet.</p>}
           <PostsList />

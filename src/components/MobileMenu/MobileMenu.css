@@ -1,0 +1,13 @@
+@import "../../assets/css/mixins.css";
+
+.mobile-menu {
+  position: absolute;
+  top: 4px;
+  right: 13px;
+  z-index: 20;
+  max-width: 50%;
+
+  @mixin atSmall {
+    display: none;
+  }
+}
