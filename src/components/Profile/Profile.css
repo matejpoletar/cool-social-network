@@ -1,36 +1,74 @@
+@import "../../assets/css/mixins.css";
+
 .profile {
+  width: 100%;
+  @mixin atMedium {
+    width: 700px;
+  }
   &__info {
     display: flex;
-    gap: 5rem;
-    align-items: center;
-    margin-bottom: 5rem;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 0;
+
+    @mixin atMedium {
+      gap: 5rem;
+      align-items: center;
+    }
+    & > img {
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      @mixin atMedium {
+        height: 200px;
+        width: 200px;
+      }
+    }
   }
 
   &__username {
-    font-size: 3rem;
     font-weight: 600;
+    font-size: 2rem;
+    @mixin atMedium {
+      font-size: 3rem;
+    }
   }
 
   &__counts {
     display: flex;
     justify-content: space-between;
-    width: 400px;
-    margin-top: 2rem;
-    font-size: 1.2rem;
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    gap: 0.5rem;
+    @mixin atMedium {
+      width: 400px;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+    }
   }
 
   &__follow {
     display: flex;
     align-items: center;
     gap: 2rem;
-    margin-top: 3rem;
     justify-content: flex-end;
+
+    font-size: 0.75rem;
+    @mixin atMedium {
+      font-size: 1.1rem;
+    }
   }
 
   &__posts {
     &__title {
-      font-size: 2.5rem;
+      margin-top: 1rem;
+      font-size: 1.25rem;
       font-weight: 600;
+      @mixin atMedium {
+        font-size: 2.5rem;
+        margin-top: 2rem;
+      }
     }
   }
 }

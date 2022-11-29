@@ -1,16 +1,25 @@
+@import "../../assets/css/mixins.css";
+
 .posts-list {
   gap: 1.5rem;
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 5rem;
-  width: 800px;
+  @mixin atMedium {
+    width: 800px;
+  }
   margin-top: 1rem;
 
   &__item {
     outline: 1px solid lightgrey;
-    padding: 2rem 3.5rem 1rem 3.5rem;
+    width: 100%;
+
+    padding: 10px;
+    @mixin atMedium {
+      padding: 2rem 3.5rem 1rem 3.5rem;
+      width: 650px;
+    }
     border-radius: 10px;
-    width: 650px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -21,24 +30,45 @@
       gap: 1rem;
       & > h3 {
         font-weight: 600;
+        font-size: 1rem;
+        @mixin atMedium {
+          font-size: 2rem;
+        }
       }
     }
 
     &__info {
       font-style: italic;
-      margin-left: 2rem;
+      margin-left: 1rem;
+      font-size: 0.7rem;
+      @mixin atMedium {
+        font-size: 1rem;
+        margin-left: 2rem;
+      }
     }
 
     &__read-more {
       font-style: italic;
       margin-left: 1.5rem;
       text-align: end;
-      color: #d37a46;
+      & > a {
+        color: #d37a46;
+        text-decoration: none;
+      }
       font-size: 1.1rem;
+      font-size: 0.8rem;
+      @mixin atMedium {
+        font-size: 1rem;
+      }
     }
 
     &__content {
-      margin: 1.5rem 0 1rem 0.5rem;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      @mixin atMedium {
+        margin: 1.5rem 0 1rem 0.5rem;
+        font-size: 1rem;
+      }
     }
   }
 }

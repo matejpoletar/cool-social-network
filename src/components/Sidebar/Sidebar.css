@@ -6,13 +6,13 @@
     display: block;
   }
   position: sticky;
-  height: calc(100vh - 112px);
+  height: calc(100vh - 115px);
   width: 280px;
   background-color: #ffe5b6;
   padding: 0 1rem;
   padding-top: 30px;
   grid-area: sidebar;
-  top: 112px;
+  top: 115px;
 
   &__menu {
     display: flex;

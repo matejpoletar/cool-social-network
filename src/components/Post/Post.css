@@ -1,9 +1,13 @@
+@import "../../assets/css/mixins.css";
+
 .post {
-  width: 700px;
+  position: relative;
+
+  @mixin atMedium {
+    width: 700px;
+  }
 
   &__title {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 0.5rem;
     &__heading {
       font-size: 2rem;
@@ -12,13 +16,23 @@
   }
 
   &__buttons {
+    margin-top: 1rem;
+    @mixin atMedium {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: auto;
+    }
     display: flex;
     gap: 1rem;
   }
 
   &__content {
     outline: 1px solid lightgrey;
-    padding: 2rem 3.5rem;
+    padding: 1rem 1.2rem;
+    @mixin atMedium {
+      padding: 2rem 3.5rem;
+    }
     border-radius: 10px;
   }
 
@@ -30,6 +44,10 @@
 
     &__text {
       font-style: italic;
+      & > a {
+        text-decoration: none;
+        color: #d37a46;
+      }
     }
   }
 }

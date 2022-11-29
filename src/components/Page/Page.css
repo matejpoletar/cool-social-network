@@ -1,5 +1,13 @@
+@import "../../assets/css/mixins.css";
+
 .page {
-  margin-left: 10px;
-  margin-right: 250px;
+  padding: 30px 20px;
+  width: 100vw;
   position: relative;
+
+  @mixin atMedium {
+    padding-left: calc(10vw + 20px);
+    padding-top: 75px;
+    width: 1200px;
+  }
 }

@@ -1,7 +1,7 @@
 @import "../../assets/css/mixins.css";
 
 .mobile-menu {
-  position: absolute;
+  position: fixed;
   top: 4px;
   right: 13px;
   z-index: 20;

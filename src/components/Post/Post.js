@@ -52,29 +52,35 @@ export default function Post() {
       <div className="post">
         <div className="post__title">
           <h2 className="post__title__heading">{postData.title}</h2>
-          {context.user.username === postData.author.username && (
-            <div className="post__buttons">
-              <Button onClick={() => navigate(`/post/${id}/edit`)} variant="outlined" startIcon={<EditIcon />}>
-                Edit
-              </Button>
-              <Button onClick={deleteHandler} variant="contained" color="error" startIcon={<DeleteIcon />}>
-                Delete
-              </Button>
-            </div>
-          )}
         </div>
-
         <div className="post__info">
           <Link to={`/profile/${postData.author.username}`}>
-            <Avatar alt={postData.author.username} src={context.user.avatar} sx={{ bgcolor: "orange", width: 34, height: 34 }} />
+            <Avatar alt={postData.author.username} src={postData.author.avatar} sx={{ bgcolor: "orange", width: 34, height: 34 }} />
           </Link>
           <span className="post__info__text">
-            Posted by <Link to={`/profile/${postData.author.username}`}>{postData.author.username}</Link> on {formatDate(new Date(postData.createdAt))}
+            Posted
+            {context.user.username !== postData.author.username && (
+              <>
+                <span> by </span>
+                <Link to={`/profile/${postData.author.username}`}>{postData.author.username}</Link>
+              </>
+            )}{" "}
+            on {formatDate(new Date(postData.createdAt))}
           </span>
         </div>
         <div className="post__content">
           <ReactMarkdown children={postData.content} />
         </div>
+        {context.user.username === postData.author.username && (
+          <div className="post__buttons">
+            <Button onClick={() => navigate(`/post/${id}/edit`)} variant="outlined" startIcon={<EditIcon />}>
+              Edit
+            </Button>
+            <Button onClick={deleteHandler} variant="contained" color="error" startIcon={<DeleteIcon />}>
+              Delete
+            </Button>
+          </div>
+        )}
       </div>
     );
   }

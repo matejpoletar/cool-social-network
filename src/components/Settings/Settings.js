@@ -30,8 +30,8 @@ export default function Settings() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
     if (image.imgFile) {
+      setLoading(true);
       const bodyFormData = new FormData();
       bodyFormData.append("file", image.imgFile);
       bodyFormData.append("token", context.user.token);
@@ -48,6 +48,8 @@ export default function Settings() {
       } catch (err) {
         console.log(err);
       }
+    } else {
+      dispatch({ type: "flashMessage", data: { message: "You need to choose a new profile image.", status: "warning" } });
     }
   };
 

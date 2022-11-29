@@ -12,12 +12,10 @@ export default function AppLayout(props) {
       <Header />
       <Sidebar />
       <MobileMenu />
-      {
-        <Page>
-          <FlashMessage />
-          <div className="page-wrapper">{props.children}</div>
-        </Page>
-      }
+      <Page>
+        <FlashMessage />
+        {props.children}
+      </Page>
     </div>
   );
 }

@@ -18,7 +18,6 @@ export default function Home() {
     async function fetchAllUserPosts() {
       try {
         const res = await Axios.post(`/home`, { token: context.user.token });
-        console.log(res.data);
         setPosts(res.data);
         setIsLoading(false);
       } catch {

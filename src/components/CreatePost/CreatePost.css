@@ -1,9 +1,14 @@
-.create-post {
-  width: 800px;
+@import "../../assets/css/mixins.css";
 
+.create-post {
+  gap: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+
+  @mixin atMedium {
+    width: 800px;
+    gap: 4rem;
+  }
 
   &__item {
     display: flex;
