@@ -9,10 +9,8 @@ export default function FlashMessage() {
     <>
       {context.flashMessages.map((data, index) => {
         return (
-          <div className="flash-message">
-            <Alert key={index} severity={data.status}>
-              {data.message}
-            </Alert>
+          <div key={index} className="flash-message">
+            <Alert severity={data.status}>{data.message}</Alert>
           </div>
         );
       })}

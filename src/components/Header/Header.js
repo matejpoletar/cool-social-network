@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Header.css";
 import { Avatar, TextField, Button, InputAdornment, Menu, MenuItem } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -15,6 +15,28 @@ export default function Header() {
     dispatch({ type: "logout" });
     navigate("/");
   };
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+    if (searchTerm.length) {
+      dispatch({ type: "searchOpen" });
+    } else {
+      dispatch({ type: "searchClose" });
+    }
+  };
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (searchTerm.length) {
+        dispatch({ type: "searchAfterDelay", data: searchTerm });
+      }
+    }, 2000);
+
+    return () => clearTimeout(delay);
+  }, [searchTerm]);
 
   return (
     <header className="header">
@@ -34,6 +56,7 @@ export default function Header() {
           size="small"
           fullWidth
           placeholder="Search for posts and people"
+          onChange={handleSearch}
         />
       </div>
       <div className="header__user-area">

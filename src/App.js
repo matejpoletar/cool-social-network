@@ -11,6 +11,7 @@ import AppLayout from "./components/AppLayout/AppLayout";
 import Post from "./components/Post/Post";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
+import SearchResults from "./components/SearchResults/SearchResults";
 
 export default function App() {
   const initialState = {
@@ -23,6 +24,10 @@ export default function App() {
       avatar: localStorage.getItem("coolSocialNetworkAvatar"),
     },
     flashMessages: [],
+    isSearching: false,
+    searchTerm: "",
+    searchRequestCount: 0,
+    searchResults: [],
   };
 
   const reducer = (state, action) => {
@@ -47,6 +52,21 @@ export default function App() {
         localStorage.removeItem("coolSocialNetworkAvatar");
         localStorage.setItem("coolSocialNetworkAvatar", action.data);
         break;
+      case "searchOpen":
+        state.isSearching = true;
+        break;
+      case "searchClose":
+        state.isSearching = false;
+        state.searchTerm = "";
+        state.searchRequestCount = 0;
+        break;
+      case "searchAfterDelay":
+        state.searchTerm = action.data;
+        state.searchRequestCount++;
+        break;
+      case "showSearchResults":
+        state.isSearching = false;
+        state.searchResults = action.data;
     }
   };
 
@@ -80,6 +100,7 @@ export default function App() {
                 <Route path="/post/:id" element={<Post />} />
                 <Route path="/post/:id/edit" element={<CreatePost editing />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/search-results/*" element={<SearchResults results={state.searchResults} />} />
                 <Route path="/" element={<Home />} />
               </Routes>
             </AppLayout>

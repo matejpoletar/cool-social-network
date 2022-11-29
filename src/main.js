@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./main.css";
 import Axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 Axios.defaults.baseURL = "http://localhost:8080";
 

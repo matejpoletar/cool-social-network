@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./MobileMenu.css";
 import { Button } from "@mui/material";
 import { appContext, appContextDispatch } from "../../AppContext";
+import Axios from "axios";
 
 export default function MobileMenu() {
   const context = useContext(appContext);
@@ -20,6 +21,22 @@ export default function MobileMenu() {
     setMenuOpen(!menuOpen);
   };
   const handleClose = () => setMenuOpen(false);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (searchTerm.length) {
+      try {
+        const res = await Axios.post("/search", { keyword: searchTerm, token: context.user.token });
+        dispatch({ type: "showSearchResults", data: res.data });
+        setMenuOpen(false);
+        navigate(`/search-results/?search=${searchTerm}`);
+      } catch {
+        console.log("Error in search results.");
+      }
+    }
+  };
 
   return (
     <div className="mobile-menu">
@@ -45,9 +62,18 @@ export default function MobileMenu() {
                   Settings
                 </Nav.Link>
               </Nav>
-              <Form className="d-flex mt-3">
-                <Form.Control type="search" placeholder="Search" className="me-2" />
-                <Button variant="outline-success">Search</Button>
+              <Form className="d-flex mt-3" onSubmit={handleSubmit}>
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                  }}
+                />
+                <Button variant="outline-success" type="submit">
+                  Search
+                </Button>
               </Form>
               <Button
                 onClick={handleLogout}
