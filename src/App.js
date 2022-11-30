@@ -88,6 +88,22 @@ export default function App() {
     }
   }, [state.isLoggedIn]);
 
+  useEffect(() => {
+    async function checkToken() {
+      if (state.isLoggedIn) {
+        try {
+          const res = await Axios.post("/check-token", { token: state.user.token });
+          if (!res.data) {
+            dispatch({ type: "logout" });
+          }
+        } catch {
+          console.log("Error in checking token.");
+        }
+      }
+    }
+    checkToken();
+  }, []);
+
   return (
     <appContext.Provider value={state}>
       <appContextDispatch.Provider value={dispatch}>
