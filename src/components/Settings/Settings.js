@@ -14,7 +14,7 @@ export default function Settings() {
 
   const imageInitial = {
     imgFile: null,
-    imgUrl: context.user.avatar ? context.user.avatar : "../../assets/images/user-default.jpg",
+    imgUrl: context.user.avatar,
   };
   const [image, setImage] = useImmer(imageInitial);
 
@@ -68,8 +68,12 @@ export default function Settings() {
         <b>Profile image:</b>
       </h3>
       <div className="settings__image">
-        <img className="settings__image__background" src={image.imgUrl} />
-        <img className="settings__image__front" src={image.imgUrl} alt="Profile image" />
+        {image.imgUrl && (
+          <>
+            <img className="settings__image__background" src={image.imgUrl} />
+            <img className="settings__image__front" src={image.imgUrl} alt="Profile image" />{" "}
+          </>
+        )}
       </div>
       {loading && <Loading />}
       <Form onSubmit={submitHandler}>

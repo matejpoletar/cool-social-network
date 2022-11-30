@@ -8,6 +8,7 @@
     width: 250px;
     height: 250px;
     position: relative;
+    outline: solid 1px lightgray;
     & > img {
       width: 250px;
       height: 250px;

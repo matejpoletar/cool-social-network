@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./main.css";
 import Axios from "axios";
 
-Axios.defaults.baseURL = "http://localhost:8080";
+Axios.defaults.baseURL = process.env.BACKENDURL || "https://coolsocialnetworkbackend.onrender.com";
 
 const root = ReactDOM.createRoot(document.querySelector("#app"));
 root.render(<App />);
