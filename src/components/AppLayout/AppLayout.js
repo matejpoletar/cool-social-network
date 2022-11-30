@@ -7,6 +7,7 @@ import FlashMessage from "../FlashMessage/FlashMessage";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import SearchOverlay from "../SearchOverlay/SearchOverlay";
 import { appContext } from "../../AppContext";
+import Footer from "../Footer/Footer";
 
 export default function AppLayout(props) {
   const context = useContext(appContext);
@@ -20,6 +21,7 @@ export default function AppLayout(props) {
         <FlashMessage />
         {props.children}
       </Page>
+      <Footer />
     </div>
   );
 }
