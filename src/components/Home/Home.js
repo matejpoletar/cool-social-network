@@ -12,7 +12,6 @@ export default function Home() {
   const context = useContext(appContext);
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { username } = useParams();
 
   useEffect(() => {
     async function fetchAllUserPosts() {
@@ -25,7 +24,7 @@ export default function Home() {
       }
     }
     fetchAllUserPosts();
-  }, [username]);
+  }, []);
 
   const trimContent = (text) => {
     return text
