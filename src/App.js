@@ -12,6 +12,7 @@ import Post from "./components/Post/Post";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import SearchResults from "./components/SearchResults/SearchResults";
+import NotFound from "./components/NotFound/NotFound";
 
 export default function App() {
   const initialState = {
@@ -118,6 +119,7 @@ export default function App() {
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/search-results/*" element={<SearchResults results={state.searchResults} />} />
                 <Route path="/" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </AppLayout>
           ) : (
