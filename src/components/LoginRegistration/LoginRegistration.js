@@ -5,6 +5,7 @@ import { TextField, Button } from "@mui/material";
 import SouthEastIcon from "@mui/icons-material/SouthEast";
 import { appContextDispatch } from "../../AppContext";
 import { useImmerReducer } from "use-immer";
+import Loading from "../Loading/Loading";
 
 export default function LoginRegistration(props) {
   const appDispatch = useContext(appContextDispatch);
@@ -41,6 +42,8 @@ export default function LoginRegistration(props) {
       message: "",
     },
   };
+
+  const [isLoading, setIsLoading] = useState(false);
 
   function reducerLogin(state, action) {
     switch (action.type) {
@@ -85,7 +88,7 @@ export default function LoginRegistration(props) {
           state.username.hasError = true;
           state.username.message = "Username cannot be longer than 30 characters.";
         }
-        if (!/^[A-Za-z0-9_ ]*$/.test(state.username.value)) {
+        if (!/^[A-Za-z0-9 ]*$/.test(state.username.value)) {
           state.username.hasError = true;
           state.username.message = "Username can contain only letters and numbers.";
         }
@@ -112,7 +115,8 @@ export default function LoginRegistration(props) {
 
       case "emailImmediateChange":
         state.email.value = action.value.toLowerCase();
-
+        state.email.hasError = false;
+        state.email.message = "";
         break;
       case "emailAfterDelay":
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.value)) {
@@ -168,11 +172,12 @@ export default function LoginRegistration(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     const res = await Axios.post("/check-username", { username: stateLogin.username.value });
     if (res.data) {
       try {
         const response = await Axios.post("/login", { username: stateLogin.username.value, password: stateLogin.password.value });
+        setIsLoading(false);
         if (response.data.user) {
           appDispatch({
             type: "login",
@@ -193,11 +198,13 @@ export default function LoginRegistration(props) {
     } else {
       dispatchLogin({ type: "usernameOnLogin", value: true });
     }
+    setIsLoading(false);
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
     const res = await Axios.post("/check-email", { email: stateRegister.email.value });
     dispatchRegister({ type: "emailOnSubmit", value: res.data });
 
@@ -217,10 +224,12 @@ export default function LoginRegistration(props) {
             avatar: "",
           },
         });
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       }
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -262,6 +271,7 @@ export default function LoginRegistration(props) {
 
   return (
     <div className="login-page">
+      {isLoading && <Loading />}
       <h1 className="login-page__title">Cool Social Network</h1>
       <p className="login-page__subtitle">Not yet registered? Sign up for Cool Social Network today.</p>
       <div className="login-page__registration-link">

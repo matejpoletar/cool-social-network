@@ -44,6 +44,7 @@ export default function App() {
       case "logout":
         state.isLoggedIn = false;
         state.user = {};
+        state.flashMessages = [];
         break;
       case "flashMessage":
         state.flashMessages.push(action.data);
