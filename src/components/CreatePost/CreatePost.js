@@ -102,6 +102,9 @@ export default function createPost(props) {
       state.hasError = false;
     });
   };
+  const handleDiscard = () => {
+    navigate(`/post/${id}`);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -112,14 +115,14 @@ export default function createPost(props) {
         </div>
         <div className="create-post__item">
           Content
-          <TextField value={postContent.value} onChange={handleOnChangeContent} error={postContent.hasError} helperText={postContent.errMessage} placeholder="Content" multiline rows={8} fullWidth />
+          <TextField value={postContent.value} onChange={handleOnChangeContent} error={postContent.hasError} helperText={postContent.errMessage} placeholder="Content" multiline rows={20} fullWidth />
         </div>
         <div className="create-post__buttons">
           <Button variant="contained" type="submit">
             Submit
           </Button>
           {props.editing && (
-            <Button variant="contained" onClick={fetchPostById}>
+            <Button variant="contained" onClick={handleDiscard}>
               Discard
             </Button>
           )}

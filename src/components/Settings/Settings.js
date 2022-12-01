@@ -6,6 +6,7 @@ import "./Settings.css";
 import { Form, Button } from "react-bootstrap";
 import { useImmer } from "use-immer";
 import Loading from "../Loading/Loading";
+import { Avatar } from "@mui/material";
 
 export default function Settings() {
   const context = useContext(appContext);
@@ -68,11 +69,13 @@ export default function Settings() {
         <b>Profile image:</b>
       </h3>
       <div className="settings__image">
-        {image.imgUrl && (
+        {image.imgUrl ? (
           <>
             <img className="settings__image__background" src={image.imgUrl} />
             <img className="settings__image__front" src={image.imgUrl} alt="Profile image" />{" "}
           </>
+        ) : (
+          <Avatar sx={{ width: 250, height: 250 }} />
         )}
       </div>
       {loading && <Loading />}

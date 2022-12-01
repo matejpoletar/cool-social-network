@@ -17,12 +17,6 @@
 
   &__buttons {
     margin-top: 1rem;
-    @mixin atMedium {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: auto;
-    }
     display: flex;
     gap: 1rem;
   }

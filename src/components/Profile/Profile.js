@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Tooltip } from "@mui/material";
+import { Avatar, Button, Tooltip } from "@mui/material";
 import Axios from "axios";
 import { appContext } from "../../AppContext";
 import Loading from "../Loading/Loading";
@@ -60,7 +60,7 @@ export default function Profile() {
     return (
       <div className="profile">
         <div className="profile__info">
-          <img alt={userData.username} src={userData.profileImgUrl} />
+          {userData.profileImgUrl ? <img alt={userData.username} src={userData.profileImgUrl} /> : <Avatar sx={{ width: 200, height: 200 }} />}
           <div>
             <h2 className="profile__username">{userData.username}</h2>
             <div className="profile__counts">
